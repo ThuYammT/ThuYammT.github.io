@@ -1,56 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Car Accessories</title>
-    <link rel="stylesheet" href="../css/global.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Accessories </title>
+    <meta name="description" content="Quotation for car accessories">
+    <meta name="author" content="Your Name">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .form-inline {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .table {
+            background-color: #ffffff;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .deleteButton {
+            display: none;
+            position: absolute;
+            right: 10px;
+        }
+
+        tr:hover .deleteButton {
+            display: block;
+        }
+
+        tr {
+            position: relative;
+        }
+
+        tfoot {
+            background-color: #f1f1f1;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Car Accessories</h1>
- 
-    <form id="accessoryForm">
-        <label for="accessory">Select an accessory:</label>
-        <select id="accessory">
-            <option value="100">Car Cover</option>
-            <option value="200">Floor Mats</option>
-            <option value="30">Seat Covers</option>
-            <option value="40">Phone Holder</option>
-        </select>
-        <br>
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" min="1" value="1">
-        <br>
- 
-        <button type="button" id="addButton">Add</button>
-    </form>
- 
-    <table>
-        <thead>
-            <tr>
-                <th>Accessory</th>
-                <th>Amount</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody id="productList">
-            <!-- Product list items will be added here dynamically -->
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="2">Total Price:</td>
-                <td id="totalPrice">0</td>
-            </tr>
-        </tfoot>
-    </table>
- 
-    <p></p>
-    <label for="vatAmount">VAT Amount:</label>
-    <span id="vatAmount"></span>
-    <br>
-    <label for="netAmount">Net Amount:</label>
-    <span id="netAmount"></span>
- 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h1>Car Accessories</h1>
+                <img src="carshowroom.jpg" alt="Company Logo" class="img-responsive center-block"
+                    style="margin-bottom: 20px;">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form id="accessoryForm" class="form-inline text-center">
+                    <div class="form-group">
+                        <label for="accessory">Select an accessory:</label>
+                        <select id="accessory" class="form-control">
+                            <option value="100">Car Cover</option>
+                            <option value="200">Floor Mats</option>
+                            <option value="30">Seat Covers</option>
+                            <option value="40">Phone Holder</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" class="form-control" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="discount">Discount:</label>
+                        <input type="number" id="discount" class="form-control" min="0" value="0">
+                    </div>
+                    <button type="button" id="addButton" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Accessory</th>
+                            <th>Amount</th>
+                            <th>Discount</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productList">
+                        <!-- Product list items will be added here dynamically -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right">Total Price:</td>
+                            <td id="totalPrice">0.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">VAT (7%):</td>
+                            <td id="vatAmount">0.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Net Amount:</td>
+                            <td id="netAmount">0.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <script>
         var totalPrice = 0;
 
@@ -67,23 +170,44 @@
             var accessoryName = accessoryOption.text();
             var accessoryPrice = parseFloat(accessoryOption.val());
             var amount = parseInt($('#amount').val());
+            var discount = parseFloat($('#discount').val());
 
+            var discountedPrice = accessoryPrice * amount - discount;
             var newRow = $('<tr></tr>');
             newRow.append('<td>' + accessoryName + '</td>');
             newRow.append('<td>' + amount + '</td>');
-            newRow.append('<td>' + (accessoryPrice * amount) + '</td>');
+            newRow.append('<td>' + discount.toFixed(2) + '</td>');
+            newRow.append('<td>' + discountedPrice.toFixed(2) + '</td>');
+            newRow.append('<button class="btn btn-danger btn-sm deleteButton">Delete</button>');
 
             $('#productList').append(newRow);
 
-            totalPrice += accessoryPrice * amount;
-            $('#totalPrice').text(totalPrice);
+            totalPrice += discountedPrice;
+            $('#totalPrice').text(totalPrice.toFixed(2));
 
             updateTotals();
         }
 
-        $(document).ready(function() {
+        function deleteProduct(row, price) {
+            totalPrice -= price;
+            $('#totalPrice').text(totalPrice.toFixed(2));
+            updateTotals();
+            row.remove();
+        }
+
+        $(document).ready(function () {
             $('#addButton').click(addToProductList);
+
+            $('#productList').on('click', '.deleteButton', function () {
+                var row = $(this).closest('tr');
+                var price = parseFloat(row.find('td:eq(3)').text());
+                deleteProduct(row, price);
+            });
         });
     </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
+    </script>
 </body>
+
 </html>
